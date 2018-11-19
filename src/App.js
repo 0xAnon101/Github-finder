@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 
@@ -8,7 +7,7 @@ class App extends Component {
     super();
     this.state = {
         username: '',
-        avatar_url: '',
+        avatar_url: null,
         html_url : null
     }
   }
@@ -24,8 +23,9 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={this.state.avatar_url} className="App-logo" alt="logo" />
-          {this.state.html_url!=null && <a href={this.state.html_url}> Profile Url</a>}
+          {this.state.avatar_url!=null && <img src={this.state.avatar_url} className="App-logo" alt="logo" />}
+          {this.state.html_url!=null && <a href={this.state.html_url} className="App-logo"> Profile Url</a>}
+          <h3> Enter Github username to search profile</h3>
           <input
           type="text"
           placeholder="Enter username"
