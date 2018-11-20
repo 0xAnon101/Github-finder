@@ -31,8 +31,10 @@ handleChange = async (e) => {
     return (
       <div className="App">
         <header className="App-header">
+          <div className="Card">
           {this.state.profile!=null && this.state.avatar_url!=null && <img src={this.state.avatar_url} className="App-logo" alt="logo" />}
-          {this.state.profile!=null && this.state.html_url!=null && <a href={this.state.html_url} className="App-logo"> Profile Url</a>}
+          {this.state.profile!=null && this.state.html_url!=null && <div><a href={this.state.html_url} className="App-logo"> Profile Url</a></div>}
+          </div>
           <h3> Enter Github username to search profile</h3>
           <input
           type="text"
