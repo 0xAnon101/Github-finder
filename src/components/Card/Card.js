@@ -11,7 +11,14 @@ export default class Card extends Component{
         username: '',
         avatar_url: null,
         html_url : null,
-        loading:false
+        loading:false,
+        login:'',
+        bio:'',
+        followers: '',
+        following: '',
+        public_repos: '',
+        company: '',
+        email: ''
     }
   }
 handleChange = async (e) => {
@@ -19,9 +26,17 @@ handleChange = async (e) => {
     this.setState({loading:true});
     try {
       const res = await axios.get('https://api.github.com/users/'+e.target.value);
+      console.log('response=======>',res.data);
       this.setState({profile: 'found'});
       this.setState({avatar_url: res.data.avatar_url});
       this.setState({html_url: res.data.html_url});
+      this.setState({login: res.data.login});
+      this.setState({bio: res.data.bio});
+      this.setState({followers: res.data.followers});
+      this.setState({following: res.data.following});
+      this.setState({public_repos: res.data.public_repos});
+      this.setState({company: res.data.company});
+      this.setState({email: res.data.email});
     } catch (e) {
       console.log('>>>>>>>Profile doesnt exist!');
       this.setState({profile: null});
@@ -31,12 +46,21 @@ handleChange = async (e) => {
     }
   }
   render() {
+    const { login, bio, followers, following, public_repos, company, email } = this.state;
     return (
       <div className="App">
         <header className="App-header">
           <div className="mdc-card">
           {this.state.profile==null && <Spinner loading={this.state.loading}/>}
           {this.state.profile!=null && this.state.avatar_url!=null && <img src={this.state.avatar_url} className="App-logo" alt="logo" />}
+          <p style={{color:'black'}}>{login}</p>
+          <p style={{color:'black'}}>{bio}</p>
+          <p style={{color:'black'}}>{followers}</p>
+          <p style={{color:'black'}}>{following}</p>
+          <p style={{color:'black'}}>{public_repos}</p>
+          <p style={{color:'black'}}>{company}</p>
+          <p style={{color:'black'}}>{email}</p>
+
           {this.state.profile!=null && this.state.html_url!=null && <div><a href={this.state.html_url} className="App-logo" style={{color: 'cornflowerblue'}}> Profile Url</a></div>}
           </div>
           <h3> Enter Github username to search profile</h3>
