@@ -12,13 +12,13 @@ export default class Card extends Component{
         avatar_url: null,
         html_url : null,
         loading:false,
-        login:'',
-        bio:'',
+        login:null,
+        bio:'NA ',
         followers: '',
         following: '',
         public_repos: '',
-        company: '',
-        email: ''
+        company: 'NA',
+        email: 'NA'
     }
   }
 handleChange = async (e) => {
@@ -26,7 +26,6 @@ handleChange = async (e) => {
     this.setState({loading:true});
     try {
       const res = await axios.get('https://api.github.com/users/'+e.target.value);
-      console.log('response=======>',res.data);
       const { avatar_url, html_url, login, bio, followers, following, public_repos, company, email } = res.data;
       this.setState({profile: 'found'});
       this.setState({avatar_url: avatar_url});
@@ -39,7 +38,6 @@ handleChange = async (e) => {
       this.setState({company: company});
       this.setState({email: email});
     } catch (e) {
-      console.log('>>>>>>>Profile doesnt exist!');
       this.setState({profile: null});
       this.setState({loading:false});
     } finally {
@@ -47,22 +45,24 @@ handleChange = async (e) => {
     }
   }
   render() {
-    const { login, bio, followers, following, public_repos, company, email } = this.state;
+    const { login, bio, followers, following, public_repos, company, email, profile,  html_url,  } = this.state;
     return (
       <div className="App">
         <header className="App-header">
           <div className="mdc-card">
-          {this.state.profile==null && <Spinner loading={this.state.loading}/>}
-          {this.state.profile!=null && this.state.avatar_url!=null && <img src={this.state.avatar_url} className="App-logo" alt="logo" />}
-          <p style={{color:'black'}}>{login}</p>
-          <p style={{color:'black'}}>{bio}</p>
-          <p style={{color:'black'}}>{followers}</p>
-          <p style={{color:'black'}}>{following}</p>
-          <p style={{color:'black'}}>{public_repos}</p>
-          <p style={{color:'black'}}>{company}</p>
-          <p style={{color:'black'}}>{email}</p>
-
-          {this.state.profile!=null && this.state.html_url!=null && <div><a href={this.state.html_url} className="App-logo" style={{color: 'cornflowerblue'}}> Profile Url</a></div>}
+          {profile==null && <Spinner loading={this.state.loading}/>}
+          {profile!=null && this.state.avatar_url!=null && <img src={this.state.avatar_url} className="App-logo" alt="logo" />}
+        {login!=null && <div style={{color:'black'}}>
+          <p >Username - {login}</p>
+          <p >Bio - {bio}</p>
+          <p >Followers - {followers}</p>
+          <p >Following - {following}</p>
+          <p >Public Repos - {public_repos}</p>
+          <p >Company - {company}</p>
+          <p >Email - {email}</p>
+          <p>Profile Url - </p>
+          </div>}
+          {profile!=null && html_url!=null && <div><a href={html_url} className="App-logo" style={{color: 'cornflowerblue'}}> {html_url}</a></div>}
           </div>
           <h3> Enter Github username to search profile</h3>
           <input
@@ -70,7 +70,7 @@ handleChange = async (e) => {
           placeholder="Enter username"
           value={this.state.username}
           onChange={this.handleChange}/>
-            {this.state.profile==null && <h2> No profile found!</h2>}
+            {profile==null && <h2> No profile found!</h2>}
         </header>
       </div>
     );
