@@ -24,6 +24,7 @@ export default class Card extends Component{
 handleChange = async (e) => {
     this.setState({username: e.target.value})
     this.setState({loading:true});
+    if(e.target.value!=null){
     try {
       const res = await axios.get('https://api.github.com/users/'+e.target.value);
       const { avatar_url, html_url, login, bio, followers, following, public_repos, company, email } = res.data;
@@ -32,17 +33,19 @@ handleChange = async (e) => {
       this.setState({html_url: html_url});
       this.setState({login: login});
       this.setState({bio: bio});
+      if(email!=null){
+      this.setState({company: company});
+      this.setState({email: email});
+      }
       this.setState({followers: followers});
       this.setState({following: following});
       this.setState({public_repos: public_repos});
-      this.setState({company: company});
-      this.setState({email: email});
     } catch (e) {
       this.setState({profile: null});
       this.setState({loading:false});
     } finally {
       this.setState({loading:false});
-    }
+    }}
   }
   render() {
     const { login, bio, followers, following, public_repos, company, email, profile,  html_url,  } = this.state;
@@ -60,7 +63,7 @@ handleChange = async (e) => {
           <p >Public Repos - {public_repos}</p>
           <p >Company - {company}</p>
           <p >Email - {email}</p>
-          <p>Profile Url - </p>
+          <p>Profile </p>
           </div>}
           {profile!=null && html_url!=null && <div><a href={html_url} className="App-logo" style={{color: 'cornflowerblue'}}> {html_url}</a></div>}
           </div>
