@@ -56,7 +56,7 @@
   border:  5px solid rgb(66, 66, 66);
   border-radius: 5px;
   height: 50px;
-  width: 500px;
+  max-width: 500px;
   font-size: 30px;
   padding: 0% 0% 0% 2%;
   color: #fff;
@@ -73,5 +73,22 @@
   color: rgb(182, 181, 181);
   font-size: 20px;
   padding: 0% 0% 0% 3%;
+}
+
+
+@media only screen and (max-width: 500px) {
+
+  .text-search::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    font-size: 15px;
+  
+  }
+  .text-search::-moz-placeholder { /* Firefox 19+ */
+    font-size: 15px;
+  }
+  
+.text-search {
+  font-size: 16px;
+}
+
 }
 
