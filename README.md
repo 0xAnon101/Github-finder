@@ -1,5 +1,7 @@
 ## Available Scripts
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e078254dba2b4580a8938119ceb067d7)](https://app.codacy.com/app/GAUTAMRAJU15/Github-finder?utm_source=github.com&utm_medium=referral&utm_content=GAUTAMRAJU15/Github-finder&utm_campaign=Badge_Grade_Dashboard)
+
 In the project directory, you can run:
 
 ### `npm start`
