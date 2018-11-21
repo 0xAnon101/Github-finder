@@ -11,7 +11,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background: url('./great.jpg') !important;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -61,6 +61,7 @@
   border-radius: 5px;
   height: 50px;
   max-width: 500px;
+  width: 400px;
   font-size: 30px;
   padding: 0% 0% 0% 2%;
   color: #fff;
