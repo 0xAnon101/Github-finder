@@ -68,38 +68,39 @@ handleChange = async (e) => {
     }
 
     if(login!= null) {
-      logins = <div style={{color:'black'}}> 
-            <p >Username - {login}</p>
-            <p >Bio - {bio}</p>
-            <p >Followers - {followers}</p>
-            <p >Following - {following}</p>
-            <p >Public Repos - {public_repos}</p>
-            <p >Company - {company}</p>
-            <p >Email - {email}</p>
-            <p>Profile Url - </p>
+      logins = <div className="resultData"> 
+            <p className="portfolio">Username -</p> <span>{login}</span><br/>
+            <p className="portfolio">Bio - </p><span>{bio}</span><br/>
+            <p className="portfolio">Profile Url - </p><span>{html_urls}</span>
+            <p className="portfolio">Followers - </p><span>{followers}</span><br/>
+            <p className="portfolio">Following - </p><span>{following}</span><br/>
+            <p className="portfolio">Public Repos -</p><span> {public_repos}</span><br/>
+            <p className="portfolio">Company -</p><span>{company}</span><br/>
+            <p className="portfolio">Email - </p><span> {email}</span><br/>
         </div>
     }
 
     return (
       <div className="App">
         <header className="App-header">
+        <div className="search-area">
+          <h3> Enter <span className="github">Github</span> username to search profile</h3>
+            <input
+            type="text"
+            className="text-search"
+            placeholder="Enter username"
+            value={this.state.username}
+            onChange={this.handleChange}/>
+              {profile==null && <h2> No profile found!</h2>}
+        </div>
         {!this.state.hide_all ?
           <div className="mdc-card">
             {spinners}
             {images}
             {logins}
-            {html_urls}
           </div>
           : ""
         }
-          
-          <h3> Enter Github username to search profile</h3>
-          <input
-          type="text"
-          placeholder="Enter username"
-          value={this.state.username}
-          onChange={this.handleChange}/>
-            {profile==null && <h2> No profile found!</h2>}
         </header>
       </div>
     );
