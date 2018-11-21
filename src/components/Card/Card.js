@@ -27,16 +27,17 @@ handleChange = async (e) => {
     try {
       const res = await axios.get('https://api.github.com/users/'+e.target.value);
       console.log('response=======>',res.data);
+      const { avatar_url, html_url, login, bio, followers, following, public_repos, company, email } = res.data;
       this.setState({profile: 'found'});
-      this.setState({avatar_url: res.data.avatar_url});
-      this.setState({html_url: res.data.html_url});
-      this.setState({login: res.data.login});
-      this.setState({bio: res.data.bio});
-      this.setState({followers: res.data.followers});
-      this.setState({following: res.data.following});
-      this.setState({public_repos: res.data.public_repos});
-      this.setState({company: res.data.company});
-      this.setState({email: res.data.email});
+      this.setState({avatar_url: avatar_url});
+      this.setState({html_url: html_url});
+      this.setState({login: login});
+      this.setState({bio: bio});
+      this.setState({followers: followers});
+      this.setState({following: following});
+      this.setState({public_repos: public_repos});
+      this.setState({company: company});
+      this.setState({email: email});
     } catch (e) {
       console.log('>>>>>>>Profile doesnt exist!');
       this.setState({profile: null});
