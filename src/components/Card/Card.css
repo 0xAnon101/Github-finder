@@ -6,7 +6,7 @@
   /* animation: App-logo-spin infinite 20s linear; */
   height: 20vmin;
   width: 20vmin;
-  margin: 0 auto;
+  margin: 20px auto;
   border-radius: 100%;
 }
 
@@ -24,21 +24,20 @@
 .search-area {
   margin: 0px auto;
   position: relative;
-  top: -50px;
+  top: -30px;
 }
 
-.Card {
-  
-}
+
 .github {
   color: #000;
   background: #fff;
-  padding: 5px;
+  padding: 5px; 
 }
 
 .resultData {
   color: #000;
   font-family: 'Signika', sans-serif;
+  padding: 10px 20px 10px 20px;
 }
 .portfolio {
   font-weight: 800;
@@ -49,6 +48,8 @@
 .portfolio span {
   text-align: right;
 }
+
+
 
 .text-search {
   background: rgba(0, 0, 0, 0.438);
