@@ -23,6 +23,7 @@ export default class Card extends Component{
     }
   }
 handleChange = async (e) => {
+
     if(e.target.value === "") {
       this.setState({hide_all: true})
     }
@@ -31,9 +32,9 @@ handleChange = async (e) => {
     }
     this.setState({username: e.target.value})
     this.setState({loading:true});
-    if(e.target.value!=null){
+    if(e.target.value!=null && e.target.value!==""){
     try {
-      const res = await axios.get('https://api.github.com/users/'+e.target.value);
+      const res = await  axios.get('https://api.github.com/users/'+e.target.value);
       const { avatar_url, html_url, login, bio, followers, following, public_repos, company, email } = res.data;
       this.setState({profile: 'found'});
       this.setState({avatar_url: avatar_url});
@@ -99,8 +100,8 @@ handleChange = async (e) => {
         {!this.state.hide_all ?
           <div className="mdc-card card-1">
             {spinners}
-            {images}
-            {logins}
+            { images}
+            { logins}
           </div>
           : ""
         }
