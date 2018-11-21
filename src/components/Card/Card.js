@@ -94,10 +94,10 @@ handleChange = async (e) => {
             placeholder="Enter username"
             value={this.state.username}
             onChange={this.handleChange}/>
-              {profile==null && <h2> No profile found!</h2>}
+        {profile==null && <h2> No profile found!</h2>}
         </div>
         {!this.state.hide_all ?
-          <div className="mdc-card">
+          <div className="mdc-card card-1">
             {spinners}
             {images}
             {logins}
