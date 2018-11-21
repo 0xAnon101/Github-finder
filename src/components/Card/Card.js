@@ -18,10 +18,17 @@ export default class Card extends Component{
         following: '',
         public_repos: '',
         company: 'NA',
-        email: 'NA'
+        email: 'NA',
+        hide_all: false
     }
   }
 handleChange = async (e) => {
+    if(e.target.value === "") {
+      this.setState({hide_all: true})
+    }
+    if(e.target.value.length === 1) {
+      this.setState({hide_all: false})
+    }
     this.setState({username: e.target.value})
     this.setState({loading:true});
     try {
@@ -46,24 +53,46 @@ handleChange = async (e) => {
   }
   render() {
     const { login, bio, followers, following, public_repos, company, email, profile,  html_url,  } = this.state;
+    let logins = null;
+    let spinners  = null;
+    let html_urls =  null;
+    let images = null;
+
+    if( profile == null) {
+      spinners = <Spinner loading={this.state.loading}/>
+    } else if( this.state.avatar_url!= null) {
+      images = <img src={this.state.avatar_url} className="App-logo" alt="logo" />
+    }
+    if(html_url!=null) {
+      html_urls =  <div><a href={html_url} className="App-logo" style={{color: 'cornflowerblue'}}> {html_url}</a></div>
+    }
+
+    if(login!= null) {
+      logins = <div style={{color:'black'}}> 
+            <p >Username - {login}</p>
+            <p >Bio - {bio}</p>
+            <p >Followers - {followers}</p>
+            <p >Following - {following}</p>
+            <p >Public Repos - {public_repos}</p>
+            <p >Company - {company}</p>
+            <p >Email - {email}</p>
+            <p>Profile Url - </p>
+        </div>
+    }
+
     return (
       <div className="App">
         <header className="App-header">
+        {!this.state.hide_all ?
           <div className="mdc-card">
-          {profile==null && <Spinner loading={this.state.loading}/>}
-          {profile!=null && this.state.avatar_url!=null && <img src={this.state.avatar_url} className="App-logo" alt="logo" />}
-        {login!=null && <div style={{color:'black'}}>
-          <p >Username - {login}</p>
-          <p >Bio - {bio}</p>
-          <p >Followers - {followers}</p>
-          <p >Following - {following}</p>
-          <p >Public Repos - {public_repos}</p>
-          <p >Company - {company}</p>
-          <p >Email - {email}</p>
-          <p>Profile Url - </p>
-          </div>}
-          {profile!=null && html_url!=null && <div><a href={html_url} className="App-logo" style={{color: 'cornflowerblue'}}> {html_url}</a></div>}
+            {spinners}
+            {images}
+            {logins}
+            {html_urls}
           </div>
+          : ""
+        }
+          
           <h3> Enter Github username to search profile</h3>
           <input
           type="text"
